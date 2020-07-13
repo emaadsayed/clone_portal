@@ -1,0 +1,19 @@
+<h1>ADD STORIES</h1>
+
+<form action="/student/story" method="POST">
+    <div>
+        <label for="name">Description</label>
+        
+        <textarea 
+        id="description" 
+        name="description"
+        placeholder="enter descriptions" 
+        required
+      ><%=story.description%></textarea> 
+
+       
+    </div>
+    <a href="/student/story/">CANCEL</a>
+    <button type="submit">Save</button>
+    </form>
+  

@@ -1,0 +1,24 @@
+<h1>VIEW STORIES</h1>
+<h1>WELCOME STUDENT</h1>
+<h1>Hi <%= user.name%></h1>
+
+<form action="/signout?_method=DELETE" method="POST">
+  <button type="submit">Log Out</button>
+</form>
+
+
+
+<br>
+<a href="/student/story/add">add stories</a>
+<br>
+<br>
+<% story.forEach(story => { %>
+
+    <br>
+    <%= story.description %>
+    <a href="/student/story/<%= story.id %>"> SHOW MORE</a>
+    <form action="/student/story/<%= story.id %>?_method=DELETE" method="POST">
+      <button type="submit">DELETE</button>
+    </form>
+    <br>
+<% }) %>

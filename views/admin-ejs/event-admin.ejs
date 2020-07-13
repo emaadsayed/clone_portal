@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/admin-css/event-admin.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container">
+
+    <!--------------------- TOP-NAV ---------------------->
+
+    <div class="top-nav">
+      <h1>SIESGSTportal<span>.</span></h1>
+      <i class="material-icons menu">menu</i>
+      <form action="/signout?_method=DELETE" method="POST">
+        <button class="button" type="submit">LOG OUT</button>
+      </form>
+    </div>
+
+    <!--------------------- SIDE-NAV ---------------------->
+
+    <div class="position">
+      <div class="side-nav open">
+        <div class="user-info">
+          <img src="/img/cesar-rincon-XHVpWcr5grQ-unsplash.jpg" alt="Avatar" class="avatar" />
+          <h3>Lorem ipsum</h3>
+        </div>
+
+        <ul>
+       
+          <li>
+            <i class="material-icons">event_seat</i><a href="/admin/event">Event</a>
+          </li>
+          <li>
+            <i class="material-icons">amp_stories</i><a href="/admin/event/add">Add Event</a>
+          </li>
+          <li><i class="material-icons">east</i><a href="/admin/event/stories">Stories</a></li>
+          <li><i class="material-icons">east</i><a href="#">SIGN OUT</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!--------------------- RIGHT-SECTION ---------------------->
+
+    <div class="right-section">
+
+       <!--------------------- UPCOMING-EVENTS ---------------------->
+
+      <h3 class="title">UPCOMING EVENTS</h3>
+      <div class="upcoming cards">
+
+          <!-- card item 01 -->
+        <figure class="card-item">
+
+          <img src="/img/card.jpg" alt="portfolio" class="card-photo">
+
+          <figcaption class="card-desc">
+            <p class="card-title">Lorem ipsum dolor sit amet</p>
+
+            <p class="card-date">Dec 19,2020</p>
+          </figcaption>
+        </figure>
+
+        <!-- card item 02 -->
+        <figure class="card-item">
+
+          <img src="/img/cesar-rincon-XHVpWcr5grQ-unsplash.jpg" alt="portfolio" class="card-photo">
+
+          <figcaption class="card-desc">
+            <p class="card-title">Lorem ipsum dolor sit amet</p>
+
+            <p class="card-date">Dec 19,2020</p>
+          </figcaption>
+        </figure>
+
+        <!-- card item 03 -->
+        <figure class="card-item">
+
+          <img src="/img/card.jpg" alt="portfolio" class="card-photo">
+
+          <figcaption class="card-desc">
+            <p class="card-title">Lorem ipsum dolor sit amet</p>
+
+            <p class="card-date">Dec 19,2020</p>
+          </figcaption>
+        </figure>
+      </div>
+     
+      <!--------------------- RECENT-EVENTS ---------------------->
+
+      <h3 class="title">RECENT EVENTS</h3>
+     
+   <div class="recent cards">
+
+    <% event.forEach(event => { %>
+        <figure class="card-item">
+
+          <img src="/img/card.jpg" alt="portfolio" class="card-photo">
+
+          <figcaption class="card-desc">
+            <a href="/admin/event/<%= event.id %>"><p class="card-title"> <%= event.name %></p></a>
+
+            <p class="card-date"><%= event.date.toDateString() %></p>
+          </figcaption>
+        </figure>
+        <% }) %>
+     
+
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
