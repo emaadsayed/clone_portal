@@ -159,6 +159,16 @@ app.get("/student/event", checkAuthenticated, checkStudent, async (req, res) => 
     res.render("admin-ejs/story-admin.ejs", { story: story});
   });
   
+  //EVENT SHOW
+app.get("/student/event/:code", checkAuthenticated, checkStudent, async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.code);
+    if (event == null) res.redirect("/student/event");
+    res.render("student-ejs/show-event-student.ejs", { event: event });
+  } catch (error) {
+    res.redirect("/student/event");
+  }
+});
   
   app.listen(port);
   

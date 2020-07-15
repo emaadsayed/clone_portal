@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Story = require("../models/story");
-const User = require("../models/users");
+const Event = require("../models/event");
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 
 //MAIN
@@ -75,6 +75,9 @@ router.put(
   },
   saveStoryAndRedirect("student-ejs/edit-story-student.ejs")
 );
+
+
+
 
 
 

@@ -74,7 +74,7 @@
           <img class="card-photo" src="<%= uevent.coverImagePath %>">
 
           <figcaption class="card-desc">
-            <a href="/admin/event/<%= uevent.id %>"> <p class="card-title"><%= uevent.name %></p></a>
+            <a href="/student/event/<%= uevent.id %>"> <p class="card-title"><%= uevent.name %></p></a>
 
             <p class="card-date"><%= uevent.date.toDateString() %></p>
           </figcaption>
@@ -95,7 +95,7 @@
           <img class="card-photo" src="<%= event.coverImagePath %>">
 
           <figcaption class="card-desc">
-            <a href="/admin/event/<%= event.id %>"><p class="card-title"> <%= event.name %></p></a>
+            <a href="/student/event/<%= event.code %>"><p class="card-title"> <%= event.name %></p></a>
 
             <p class="card-date"><%= event.date.toDateString() %></p>
           </figcaption>
