@@ -20,6 +20,9 @@
         <i class="material-icons">
             account_circle
         </i>
+        <% if (messages.error) { %>
+          <p id="message"> <%= messages.error %> </p> 
+          <% } %>
         <div class="content">
             <div>
                 <input class="input" type="email" id="email" name="email" required placeholder="Email"></input>
