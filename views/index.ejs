@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/homapage.css">
-    <title>siesgstportal</title>
+    <title>SIESGSTportal</title>
 </head>
 <body>
 
@@ -50,7 +50,7 @@
                             <img src="/img/card.jpg" alt="portfolio" class="card-photo">
                        
                         <figcaption class="card-desc">
-                            <p class="card-title"><%= event.name %></p>
+                            <a href="/signin"><p class="card-title"><%= event.name %></p></a>
                             <p class="card-text"><%= event.description.slice(0,200) %> ....</p>
                             <p class="card-date"><%= event.date.toDateString() %></p>   
                         </figcaption>

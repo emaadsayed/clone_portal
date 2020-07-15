@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SIESGSTportal</title>
-    <link rel="stylesheet" href="/css/admin-css/show-event-admin.css" />
+    <link rel="stylesheet" href="/css/student-css/story-student.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -16,18 +15,18 @@
   <body>
     <div class="container">
         
-     <!--------------------- TOP-NAV ---------------------->
+      <!--------------------- TOP-NAV ---------------------->
 
-    <div class="top-nav">
+      <div class="top-nav">
         <h1>SIESGSTportal<span>.</span></h1>
         <i class="material-icons menu">menu</i>
-        <form action="/signout?_method=DELETE" method="POST">
+        <form action="/signout?_method=DELETE" method="POST" class="form" >
           <button class="button" type="submit">LOG OUT</button>
         </form>
       </div>
-  
+
       <!--------------------- SIDE-NAV ---------------------->
-  
+
       <div class="position">
         <div class="side-nav open">
           <div class="user-info">
@@ -55,46 +54,44 @@
         </div>
       </div>
 
+
       <!--------------------- RIGHT-SECTION ---------------------->
 
       
         <div class="container-one">
         
-            <h3 class="line heading">EVENTS</h3>
-            <div class="story">
-                <div class="story-content">
-                  <img class="image-in" src="<%= event.coverImagePath %>">
-                        <div class="box">     
-                            <p class="title"><%= event.name %></p>
-                            <p class="card-date"><%= event.date.toDateString() %></p>
-                            <p class="desc"> <%= event.description %></p>
-                        </div>  
-                        <form action="/admin/event/<%= event.id %>?_method=DELETE" method="POST" class="lower-box">
-                            <a href="/admin/event/edit/<%= event.id %>" class="button b"> <i class="material-icons">edit</i></a>
-                            <button type="submit" class="button a"> <i class="material-icons">delete</i></button>
-                          </form>
-                    
+            <p class="line heading">QUARANTINE STORIES</p>
+            <% story.forEach(story => { %>
+                <div class="story">
+                    <div class="story-content">
+                        <p class="title"><%= story.name %></p>
+                        <img class="image-in" src="<%= story.coverImagePath %>">
+                            <div class="box">
+                                <div class="lc">
+                                    <p class=""><i class="material-icons">favorite_border</i> Like</p>
+                                    <p class="lc-content"><i class="material-icons">insert_comment</i> Comment</p>
+                                </div>
+                                <p class="desc"><%= story.description %> ....<span class="read">more</span></p>
+                            </div>  
+                    </div>
                 </div>
-            </div>
-            
-          </div>
-       
-       
-       
+                <% }) %>
+         
         </div>
 
       
-  
+    </div>
 
-        <script>
-          const burger = document.querySelector(".top-nav i");
-    const side = document.querySelector(".side-nav");
-    
-    burger.addEventListener("click", (e) => {
-      side.classList.toggle("open");
-      e.preventDefault();
-    });
-    const add = document.querySelector(".inner");
+   
+    <script>
+      const burger = document.querySelector(".top-nav i");
+const side = document.querySelector(".side-nav");
+
+burger.addEventListener("click", (e) => {
+  side.classList.toggle("open");
+  e.preventDefault();
+});
+const add = document.querySelector(".inner");
 const before = document.querySelector(".before");
 
 
@@ -105,6 +102,6 @@ before.classList.toggle("after")
 e.preventDefault();
 });
 
-        </script>
+    </script>
   </body>
 </html>

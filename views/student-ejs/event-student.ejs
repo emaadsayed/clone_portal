@@ -7,7 +7,7 @@
   <title>SIESGSTportal</title>
   <link rel="stylesheet" href="/css/admin-css/event-admin.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
 <body>
@@ -26,31 +26,39 @@
     <!--------------------- SIDE-NAV ---------------------->
 
     <div class="position">
-      <div class="side-nav open">
-        <div class="user-info">
-          <img src="/img/cesar-rincon-XHVpWcr5grQ-unsplash.jpg" alt="Avatar" class="avatar" />
-          <h3>Admin</h3>
-        </div>
+        <div class="side-nav open">
+          <div class="user-info">
+            <img
+              src="/img/cesar-rincon-XHVpWcr5grQ-unsplash.jpg"
+              alt="Avatar"
+              class="avatar"
+            />
+            <h3><%= user %></h3>
+          </div>
 
-        <ul>
-       
-          <li class="border">
-            <i class="material-icons">event</i>
-            <a href="/admin/event">Event<span class="fas fa-caret-down before "></span></a>
-         
-            <ul>
-              
-              <li class="inner" >  <i class="material-icons">create</i><a href="/admin/event/add">Create Event</a></li>
-            </ul>
-          </li>
-   
-          <li class="border"><i class="material-icons">recent_actors</i><a href="/admin/story">Stories</a></li>
-          <form action="/signout?_method=DELETE" class="border s-hidden" method="POST">
-            <i class="material-icons">east</i><button class="log" type="submit">log out</button>
-          </form>
-        </ul>
+          <ul>
+            <li class="border">
+                <i class="material-icons">event</i>
+                <a href="/student/event">Event</a>
+              </li>
+
+            <li class="border">
+              <i class="material-icons">recent_actors</i>
+              <a href="/student/story">Story<span class="fas fa-caret-down before "></span></a>
+              <ul>
+                 <div class="inner" >
+                <li id="i-top">  <i class="material-icons">person</i><a href="/student/story/mystory">My Story</a></li>
+                <li >  <i class="material-icons">create</i><a href="/student/story/add">Create Story</a></li>
+              </div>
+              </ul>
+            </li>
+            <form action="/signout?_method=DELETE" class="border s-hidden" method="POST">
+              <i class="material-icons">east</i><button class="log" type="submit">log out</button>
+            </form>
+          </ul>
+        </div>
       </div>
-    </div>
+
     <!--------------------- RIGHT-SECTION ---------------------->
 
     <div class="right-section">
@@ -106,7 +114,6 @@ burger.addEventListener("click", (e) => {
   side.classList.toggle("open");
   e.preventDefault();
 });
-
 const add = document.querySelector(".inner");
 const before = document.querySelector(".before");
 

@@ -1,71 +1,117 @@
 const express = require("express");
 const router = express.Router();
 const Story = require("../models/story");
+const User = require("../models/users");
+const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 
 //MAIN
-router.get("/", async (req, res) => {
+router.get("/", checkAuthenticated, checkStudent, async (req, res) => {
   const story = await Story.find();
-  const user = req.user;
-  res.render("stories.ejs", { user: user, story: story });
+  res.render("student-ejs/story-student.ejs", { story: story, user: req.user.name });
 });
 
 //ADD
 router.post(
   "/",
   async (req, res, next) => {
-    req.story = new Story();
-    next();
-  },
-  saveStoryAndRedirect("add-stories.ejs")
+    let story = new Story({
+      description : req.body.description,
+      name : req.user.name,
+      code : req.user.id
+    })
+    saveCover(story, req.body.cover)
+
+
+    try {
+      story = await story.save();
+      res.redirect("/student/story/mystory");
+    } catch (e) {
+      res.render("student-ejs/add-student-story.ejs", { story: story });
+    }
+  }
 );
 
 //ADD
-router.get("/add", (req, res) => {
-  res.render("add-stories.ejs", { story: new Story() });
+router.get("/add", checkAuthenticated, checkStudent, async (req, res) => {
+
+  res.render("student-ejs/add-story-student.ejs", { story: new Story(), user:req.user.name});
+
 });
 
-//SHOW
-router.get("/:id", async (req, res) => {
-  const story = await Story.findById(req.params.id);
-  if (story == null) res.redirect("/student/story");
-  res.render("show-story.ejs", { story: story });
+//MYSTORY
+router.get("/mystory", checkAuthenticated, checkStudent, async (req, res) => {
+  const story = await Story.find({code: req.user.id});
+ 
+  res.render("student-ejs/my-story-student.ejs", { story: story, user:req.user.name});
+
+
 });
+
 
 //DELETE
-router.delete("/:id", async (req, res) => {
-  await Story.findByIdAndDelete(req.params.id);
-  res.redirect("/student/story");
+router.delete("/:code", async (req, res) => {
+  await Story.findOneAndDelete( {code: req.params.code});
+  res.redirect("/student/story/mystory");
 });
 
 //EDIT
-router.get("/edit/:id", async (req, res) => {
-  const story = await Story.findById(req.params.id);
-  res.render("edit-story.ejs", { story: story });
+router.get("/edit/:code", checkAuthenticated, checkStudent, async (req, res) => {
+  try {
+    const story = await Story.findOne({code: req.params.code});
+    res.render("student-ejs/edit-story-student.ejs", { story: story, user:req.user.name });
+  } catch (error) {
+    res.redirect("/student/story/mystory");
+  }
+ 
 });
 
 //EDIT
 router.put(
-  "/:id",
+  "/:code",
   async (req, res, next) => {
-    req.story = await Story.findById(req.params.id);
-    console.log(req.story);
+    req.story = await Story.findOne({code: req.params.code});
+ 
     next();
   },
-  saveStoryAndRedirect("edit-stories.ejs")
+  saveStoryAndRedirect("student-ejs/edit-story-student.ejs")
 );
+
+
 
 function saveStoryAndRedirect(path) {
   return async (req, res) => {
     let story = req.story;
     story.description = req.body.description;
-
+    saveCover(story, req.body.cover)
     try {
       story = await story.save();
-      res.redirect(`/student/story/${story.id}`);
+      res.redirect(`/student/story/mystory`);
     } catch (e) {
       res.render(path, { story: story });
     }
   };
 }
 
+
+function saveCover(story, coverEncoded) {
+  if (coverEncoded == null) return
+  const cover = JSON.parse(coverEncoded)
+  if (cover != null && imageMimeTypes.includes(cover.type)) {
+    story.coverImage = new Buffer.from(cover.data, 'base64')
+    story.coverImageType = cover.type
+  }
+}
+
+function checkStudent(req, res, next) {
+  if (req.user.role != "student") {
+    return res.redirect("/admin/event");
+  }
+  next();
+}
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+}
 module.exports = router;

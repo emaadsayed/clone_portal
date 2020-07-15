@@ -3,12 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>SIESGSTportal</title>
     <link rel="stylesheet" href="/css/admin-css/add-event-admin.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+    <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+    <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script defer src="/javascripts/fileUpload.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   </head>
 
   <body>
@@ -29,25 +37,26 @@
       <div class="position">
         <div class="side-nav open">
           <div class="user-info">
-            <img
-              src="/img/cesar-rincon-XHVpWcr5grQ-unsplash.jpg"
-              alt="Avatar"
-              class="avatar"
-            />
-            <h3>Lorem ipsum</h3>
+            <img src="/img/cesar-rincon-XHVpWcr5grQ-unsplash.jpg" alt="Avatar" class="avatar" />
+            <h3>Admin</h3>
           </div>
-
-       
+  
           <ul>
-       
-            <li>
-              <i class="material-icons">event_seat</i><a href="/admin/event">Event</a>
+         
+            <li class="border">
+              <i class="material-icons">event</i>
+              <a href="/admin/event">Event<span class="fas fa-caret-down before "></span></a>
+           
+              <ul>
+                
+                <li class="inner" >  <i class="material-icons">create</i><a href="/admin/event/add">Create Event</a></li>
+              </ul>
             </li>
-            <li>
-              <i class="material-icons">amp_stories</i><a href="/admin/event/add">Add Event</a>
-            </li>
-            <li><i class="material-icons">east</i><a href="/admin/event/stories">Stories</a></li>
-            <li><i class="material-icons">east</i><a href="#">SIGN OUT</a></li>
+     
+            <li class="border"><i class="material-icons">recent_actors</i><a href="/admin/story">Stories</a></li>
+            <form action="/signout?_method=DELETE" class="border s-hidden" method="POST">
+              <i class="material-icons">east</i><button class="log" type="submit">log out</button>
+            </form>
           </ul>
         </div>
       </div>
@@ -72,18 +81,28 @@
                 <p class="name">Event Date</p>
                 <input type="date" class="i-name"  id="date"  name="date" required value="<%= event.date %>">
             </div>
+
+            <div class="event-name third">
+              <p class="name">Category</p>
+              <select name="category" id="category" class="i-name" required>
+                <option value="recent">Recent Event</option>
+                <option value="upcoming">Upcoming Event</option>
+              </select>
+          </div>
         </div>    
 
         <div class="event-name">
             <p class="name">Description</p>
             <textarea type="text" class="i-name desc" placeholder="Enter name of event"  id="description"  name="description" ><%=event.description%></textarea>
         </div>
-
-        <div><a href="#" class="upload">Upload Image</a></div>
+        <div>
+          <label>Cover</label>
+          <input type="file" name="cover" class="filepond">
+        </div>
         
         
         <!-- <a href="/admin/event/<%= event.id %>" class="s-button cancel">CANCEL</a> -->
-        <div><input type="submit" name="" value="UPDATE" class="s-button"></div>
+        <div><input type="submit" name="" value="UPDATE" class="s-button"></>
 
     </div>
 </form>
@@ -94,6 +113,25 @@
       
     </div> <!--/Container-->
 
-    <script src="app.js"></script>
+    <script>
+      const burger = document.querySelector(".top-nav i");
+const side = document.querySelector(".side-nav");
+
+burger.addEventListener("click", (e) => {
+  side.classList.toggle("open");
+  e.preventDefault();
+});
+const add = document.querySelector(".inner");
+const before = document.querySelector(".before");
+
+
+before.addEventListener("click", (e) => {
+add.classList.toggle("add")
+before.classList.toggle("after")
+
+e.preventDefault();
+});
+
+    </script>
   </body>
 </html>

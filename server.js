@@ -10,6 +10,7 @@ if (process.env.NODE_ENV !== "production") {
   const session = require("express-session");
   const methodOverride = require("method-override");
   
+  
   app.use(express.static(__dirname + "/public"));
   
   //ROUTES
@@ -19,6 +20,8 @@ if (process.env.NODE_ENV !== "production") {
   // USER MODEL
   const User = require("./models/users");
   const Event = require("./models/event");
+  const Story = require("./models/story");
+  
   
   // MONGO
   const mongoose = require("mongoose");
@@ -38,7 +41,7 @@ if (process.env.NODE_ENV !== "production") {
   app.set("view-engine", "ejs");
   
   // BODY-PARSER
-  app.use(express.urlencoded({ extended: false }));
+  app.use(express.urlencoded({ extended: false, limit:'5mb' }));
   
   // USE
   app.use(flash());
@@ -55,7 +58,7 @@ if (process.env.NODE_ENV !== "production") {
   
   // INDEX
   app.get("/", async (req, res) => {
-    const event = await Event.find().sort({ date: -1 }).limit(6);
+    const event = await Event.find({category: "recent"}).sort({ date: -1 }).limit(6);
     res.render("index.ejs", { event: event });
   });
   
@@ -98,18 +101,8 @@ if (process.env.NODE_ENV !== "production") {
   // SIGN-OUT
   app.delete("/signout", (req, res) => {
     req.logOut();
-    res.redirect("/signin");
+    res.redirect("/");
   });
-  
-  //ADMIN
-  // app.get("/admin", checkAuthenticated, checkAdmin, (req, res) => {
-  //   res.render("admin.ejs", { user: req.user });
-  // });
-  
-  //Student
-  // app.get("/student", checkAuthenticated, checkStudent, (req, res) => {
-  //   res.render("student.ejs", { user: req.user });
-  // });
   
   // MIDDLEWARE
   function checkAuthenticated(req, res, next) {
@@ -133,26 +126,38 @@ if (process.env.NODE_ENV !== "production") {
     } else if (req.user.role == "admin") {
       return res.redirect("/admin/event");
     } else {
-      return res.redirect("/student/story");
+      return res.redirect("/student/event");
     }
   }
   
   function checkAdmin(req, res, next) {
     if (req.user.role != "admin") {
-      return res.redirect("/student");
+      return res.redirect("/student/event");
     }
     next();
   }
   
   function checkStudent(req, res, next) {
     if (req.user.role != "student") {
-      return res.redirect("/admin");
+      return res.redirect("/admin/event");
     }
     next();
   }
   
   app.use("/student/story", studentRouter);
   app.use("/admin/event", adminRouter);
+
+app.get("/student/event", checkAuthenticated, checkStudent, async (req, res) => {
+    const event = await Event.find({category: "recent"}).sort({ date: -1 });
+    const uevent = await Event.find({category: "upcoming"}).sort({ date: 1 }).limit(3);
+    res.render("student-ejs/event-student.ejs", { event: event, uevent:uevent,user: req.user.name  });
+  });
+
+  app.get("/admin/story", checkAuthenticated, checkAdmin, async (req, res) => {
+    const story = await Story.find();
+    res.render("admin-ejs/story-admin.ejs", { story: story});
+  });
+  
   
   app.listen(3000);
   

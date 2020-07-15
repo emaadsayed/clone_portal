@@ -20,6 +20,7 @@ p {
 }
 a {
   text-decoration: none;
+  color: black;
 }
 
 
@@ -60,12 +61,12 @@ a {
   width: 100%;
   top: 0;
   max-width: 1400px;
+  z-index: 1000;
 }
 
 
 
-
-.navbar span {
+ span {
   color: red;
 }
 
@@ -88,9 +89,10 @@ a {
 }
 
 .buttons {
-  font-size: 0.75em;
+  font-size: 0.8em;
   display: flex;
   margin: 2em 0;
+  font-weight: 500;
 }
 
 .button-1 {
@@ -98,6 +100,7 @@ a {
   background-color: red;
   padding: 0.5em 1.5em;
   display: inline-block;
+  border-radius: 20px;
 }
 
 .button-1:hover {
@@ -112,6 +115,7 @@ a {
   padding: 0.5em 1.5em;
   margin-left: 1.5em;
   display: inline-block;
+  border-radius: 20px;
 }
 
 .button-2:hover {
@@ -162,21 +166,22 @@ a {
 
 .card-title {
   font-size: 0.75;
-  font-weight: 300;
+  font-weight: 600;
   margin: 0em 0 0.5em;
 }
 
 .card-text {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 0.75em;
   margin-bottom: 1em;
-  color: rgba(0, 0, 0, 0.59);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .card-date {
+  font-weight: 500;
   font-size: 0.75em;
   font-style: italic;
-  color: rgba(0, 0, 0, 0.59);
+  color: rgba(0, 0, 0, 0.7);
 }
 
 

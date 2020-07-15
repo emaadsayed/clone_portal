@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const Event = require("../models/event");
+const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 
 //MAIN
-router.get("/", async (req, res) => {
-  const event = await Event.find().sort({ date: -1 });
-  res.render("admin-ejs/event-admin.ejs", { event: event });
+router.get("/", checkAuthenticated, checkAdmin, async (req, res) => {
+  const event = await Event.find({category: "recent"}).sort({ date: -1 });
+  const uevent = await Event.find({category: "upcoming"}).sort({ date: 1 });
+  res.render("admin-ejs/event-admin.ejs", { event: event, uevent:uevent });
 });
 
 //ADD
@@ -14,17 +16,18 @@ router.post(
   async (req, res, next) => {
     req.event = new Event();
     next();
+
   },
   saveStoryAndRedirect("admin-ejs/add-event-admin.ejs")
 );
 
 //ADD
-router.get("/add", async (req, res) => {
+router.get("/add", checkAuthenticated, checkAdmin, async (req, res) => {
   res.render("admin-ejs/add-event-admin.ejs", { event: new Event() });
-});
+})
 
 //SHOW
-router.get("/:id", async (req, res) => {
+router.get("/:id", checkAuthenticated, checkAdmin, async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
     if (event == null) res.redirect("/admin/event");
@@ -41,7 +44,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 //EDIT
-router.get("/edit/:id", async (req, res) => {
+router.get("/edit/:id", checkAuthenticated, checkAdmin, async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
     res.render("admin-ejs/edit-event-admin.ejs", { event: event });
@@ -65,8 +68,9 @@ function saveStoryAndRedirect(path) {
     let event = req.event;
     event.name = req.body.name;
     event.date = req.body.date;
+    event.category = req.body.category;
     event.description = req.body.description;
-
+    saveCover(event, req.body.cover)
     try {
       event = await event.save();
       res.redirect(`/admin/event/${event.id}`);
@@ -76,9 +80,27 @@ function saveStoryAndRedirect(path) {
   };
 }
 
-//  router.get("/stories", async (req, res) => {
+function saveCover(event, coverEncoded) {
+  if (coverEncoded == null) return
+  const cover = JSON.parse(coverEncoded)
+  if (cover != null && imageMimeTypes.includes(cover.type)) {
+    event.coverImage = new Buffer.from(cover.data, 'base64')
+    event.coverImageType = cover.type
+  }
+}
 
-//     res.send('stories')
-//   });
+function checkAdmin(req, res, next) {
+  if (req.user.role != "admin") {
+    return res.redirect("/student/event");
+  }
+  next();
+}
 
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+
+  res.redirect("/signin");
+}
 module.exports = router;

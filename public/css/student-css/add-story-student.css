@@ -66,7 +66,6 @@ img {
   font-size: 2em;
   cursor: pointer;
 }
-
 .top-nav .button {
   font-size: 1em;
   color: white;
@@ -148,8 +147,7 @@ img {
 .container-one{
     margin-top: 80px;
     padding: 2em;
-    background-color: #fcfaee;
-   
+background-color: #fcfaee;
 }
 
 
@@ -195,7 +193,7 @@ img {
     border: none;
 }
 
-.event-name input, textarea, select{
+.event-name input, textarea{
     padding: 0.5em;
     margin: 1em 0 1.75em;
     width: 100%;
@@ -219,18 +217,18 @@ textarea{
 }
 
 .s-button{
-    color: white;
-    background-color: #E92020;
-    outline: none;
-    border: none;
-    border-radius: 20px;
-    font-size: 0.65em;
-    padding: 0.5em 1.75em;
-    position: absolute;
-    top: 88em;
-    right: 2em;
-    font-family: "Poppins", sans-serif;
-    cursor: pointer;
+  color: white;
+  background-color: #E92020;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.65em;
+  padding: 0.5em 1.75em;
+  position: absolute;
+  top: 62.7em;
+  right: 2em;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
 }
 
 
@@ -246,10 +244,9 @@ textarea{
   }
 
 
-
   .side-nav {
     transform: translateX(0);
-     top: 80px;
+    top: 80px;
   }
   
   .user-info {
@@ -285,7 +282,7 @@ textarea{
     }
 
     .s-button{
-        top: 82em;
+        top: 63.5em;
     }
 
     .card-body{
@@ -294,27 +291,23 @@ textarea{
     }
     .name-flex{
         display: flex;
-        flex-wrap: wrap;
     }
     .left{
         margin-left: 2em;
-        width: 47%;
+        width: 50%;
     }
     .right{
-        width: 47%;
+        width: 50%;
     }
-
-    .third{
-
-      width: 47%;
-  }
 }
+
 
 .filepond{
   margin-top: 1em;
   height:100px;
   width: 364px;
 }
+
 
 
 .border {
@@ -329,6 +322,7 @@ textarea{
   .inner a{
     font-size: 1em;
   }
+  
   .add{
     display: block;
   }
@@ -352,3 +346,6 @@ margin-left: 6em;
   margin-left: 0.8em;
 font-size: 1em;
 } 
+#i-top{
+  margin-bottom: 0.5em;
+}
