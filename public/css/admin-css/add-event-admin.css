@@ -227,12 +227,17 @@ textarea{
     font-size: 0.65em;
     padding: 0.5em 1.75em;
     position: absolute;
-    top: 88em;
+    top: 75em;
     right: 2em;
     font-family: "Poppins", sans-serif;
     cursor: pointer;
 }
 
+.filepond{
+  margin-top: 1em;
+  height:100px;
+  width: 222px;
+}
 
 
 /*----------------------- MEDIA -------------------------*/
@@ -276,6 +281,14 @@ textarea{
   .s-hidden{
     display:none;
   }
+  .s-button{
+    top: 81em;
+}
+  .filepond{
+   
+
+    width: 290px;
+  }
 }
 
 @media (min-width: 70em)
@@ -285,7 +298,7 @@ textarea{
     }
 
     .s-button{
-        top: 82em;
+        top: 82.5em;
     }
 
     .card-body{
@@ -308,13 +321,17 @@ textarea{
 
       width: 47%;
   }
+
+  .filepond{
+    margin-top: 1em;
+    height:100px;
+  width: 364px;
+  }
+  
 }
 
-.filepond{
-  margin-top: 1em;
-  height:100px;
-  width: 364px;
-}
+
+
 
 
 .border {
