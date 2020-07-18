@@ -59,7 +59,7 @@ if (process.env.NODE_ENV !== "production") {
   
   // INDEX
   app.get("/", async (req, res) => {
-    const event = await Event.find({category: "recent"}).sort({ date: -1 }).limit(6);
+    const event = await Event.find({category: "recent"}).sort({ date: -1 }).limit(9);
     res.render("index.ejs", { event: event });
   });
   
