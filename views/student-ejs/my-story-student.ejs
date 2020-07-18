@@ -80,8 +80,8 @@
                             </div>
                             <p class="desc"><%= story.description %> ....<span class="read">more</span></p>
                         </div>  
-                        <form action="/student/story/<%= story.code %>?_method=DELETE" method="POST" class="lower-box">
-                            <a href="/student/story/edit/<%= story.code %>" class="button b"> <i class="material-icons">edit</i></a>
+                        <form action="/student/story/<%= story.id %>?_method=DELETE" method="POST" class="lower-box">
+                            <a href="/student/story/edit/<%= story.id %>" class="button b"> <i class="material-icons">edit</i></a>
                             <button type="submit" class="button a"> <i class="material-icons">delete</i></button>
                           </form>
                 </div>

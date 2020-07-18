@@ -196,9 +196,44 @@ img {
   padding-bottom: 3em;
 }
 
+.inner{
+  margin-left: 3em;
+  margin-top: 1em;
+  display: none;
+  }
+  .inner a{
+    font-size: 0.9em;
+  }
+  
+  .add{
+    display: block;
+  }
+.side-nav ul li a span{
+
+margin-left: 6em;
+
+  font-size: 19px;
+
+}
+.after{
+  transform:rotate(-180deg);
+} 
+
+
+.log{
+  background-color: #32373d;
+  border: none;
+  color: white;
+  font-family: "poppins";
+  margin-left: 0.8em;
+font-size: 0.9em;
+} 
+#i-top{
+  margin-bottom: 0.8em;
+}
 /*----------------------- SIDE-NAV MEDIA -------------------------*/
 
-@media (min-width: 650px) {
+@media (min-width: 41em) {
   .top-nav i {
     display: none;
   }
@@ -238,6 +273,10 @@ img {
   .s-hidden{
     display:none;
   }
+
+  .inner a{
+    font-size: 1em;
+  }
 }
 
 /*----------------------- CARD MEDIA -------------------------*/
@@ -262,38 +301,3 @@ img {
 
 
 
-.inner{
-  margin-left: 3em;
-  margin-top: 1em;
-  display: none;
-  }
-  .inner a{
-    font-size: 0.9em;
-  }
-  
-  .add{
-    display: block;
-  }
-.side-nav ul li a span{
-
-margin-left: 6em;
-
-  font-size: 19px;
-
-}
-.after{
-  transform:rotate(-180deg);
-} 
-
-
-.log{
-  background-color: #32373d;
-  border: none;
-  color: white;
-  font-family: "poppins";
-  margin-left: 0.8em;
-font-size: 0.9em;
-} 
-#i-top{
-  margin-bottom: 0.8em;
-}

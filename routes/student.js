@@ -49,15 +49,15 @@ router.get("/mystory", checkAuthenticated, checkStudent, async (req, res) => {
 
 
 //DELETE
-router.delete("/:code", async (req, res) => {
-  await Story.findOneAndDelete( {code: req.params.code});
+router.delete("/:id", async (req, res) => {
+  await Story.findOneAndDelete( {_id: req.params.id});
   res.redirect("/student/story/mystory");
 });
 
 //EDIT
-router.get("/edit/:code", checkAuthenticated, checkStudent, async (req, res) => {
+router.get("/edit/:id", checkAuthenticated, checkStudent, async (req, res) => {
   try {
-    const story = await Story.findOne({code: req.params.code});
+    const story = await Story.findOne({_id: req.params.id});
     res.render("student-ejs/edit-story-student.ejs", { story: story, user:req.user.name });
   } catch (error) {
     res.redirect("/student/story/mystory");
@@ -67,10 +67,11 @@ router.get("/edit/:code", checkAuthenticated, checkStudent, async (req, res) => 
 
 //EDIT
 router.put(
-  "/:code",
+  "/:id",
   async (req, res, next) => {
-    req.story = await Story.findOne({code: req.params.code});
- 
+    console.log(req.body.description)
+    req.story = await Story.findOne({_id: req.params.id});
+    console.log(req.story)
     next();
   },
   saveStoryAndRedirect("student-ejs/edit-story-student.ejs")

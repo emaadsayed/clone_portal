@@ -31,23 +31,30 @@
       <div class="position">
         <div class="side-nav open">
           <div class="user-info">
-            <img src="/img/cesar-rincon-XHVpWcr5grQ-unsplash.jpg" alt="Avatar" class="avatar" />
-            <h3>Admin</h3>
+            <img
+              src="/img/cesar-rincon-XHVpWcr5grQ-unsplash.jpg"
+              alt="Avatar"
+              class="avatar"
+            />
+            <h3><%= user %></h3>
           </div>
-  
+
           <ul>
-         
             <li class="border">
-              <i class="material-icons">event</i>
-              <a href="/admin/event">Event<span class="fas fa-caret-down before "></span></a>
-           
+                <i class="material-icons">event</i>
+                <a href="/student/event">Event</a>
+              </li>
+
+            <li class="border">
+              <i class="material-icons">recent_actors</i>
+              <a href="/student/story">Story<span class="fas fa-caret-down before "></span></a>
               <ul>
-                
-                <li class="inner" >  <i class="material-icons">create</i><a href="/admin/event/add">Create Event</a></li>
+                 <div class="inner" >
+                <li id="i-top">  <i class="material-icons">person</i><a href="/student/story/mystory">My Story</a></li>
+                <li >  <i class="material-icons">create</i><a href="/student/story/add">Create Story</a></li>
+              </div>
               </ul>
             </li>
-     
-            <li class="border"><i class="material-icons">recent_actors</i><a href="/admin/story">Stories</a></li>
             <form action="/signout?_method=DELETE" class="border s-hidden" method="POST">
               <i class="material-icons">east</i><button class="log" type="submit">Log Out</button>
             </form>

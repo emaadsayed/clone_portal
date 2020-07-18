@@ -164,7 +164,7 @@ app.get("/student/event/:id", checkAuthenticated, checkStudent, async (req, res)
   try {
     const event = await Event.findById(req.params.id);
     if (event == null) res.redirect("/student/event");
-    res.render("student-ejs/show-event-student.ejs", { event: event });
+    res.render("student-ejs/show-event-student.ejs", { event: event, user:req.user.name  });
   } catch (error) {
     res.redirect("/student/event");
   }
