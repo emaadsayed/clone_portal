@@ -53,7 +53,7 @@
               </ul>
             </li>
             <form action="/signout?_method=DELETE" class="border s-hidden" method="POST">
-              <i class="material-icons">east</i><button class="log" type="submit">log out</button>
+              <i class="material-icons">east</i><button class="log" type="submit">Log Out</button>
             </form>
           </ul>
         </div>
@@ -95,7 +95,7 @@
           <img class="card-photo" src="<%= event.coverImagePath %>">
 
           <figcaption class="card-desc">
-            <a href="/student/event/<%= event.code %>"><p class="card-title"> <%= event.name %></p></a>
+            <a href="/student/event/<%= event.id %>"><p class="card-title"> <%= event.name %></p></a>
 
             <p class="card-date"><%= event.date.toDateString() %></p>
           </figcaption>

@@ -160,9 +160,9 @@ app.get("/student/event", checkAuthenticated, checkStudent, async (req, res) => 
   });
   
   //EVENT SHOW
-app.get("/student/event/:code", checkAuthenticated, checkStudent, async (req, res) => {
+app.get("/student/event/:id", checkAuthenticated, checkStudent, async (req, res) => {
   try {
-    const event = await Event.findById(req.params.code);
+    const event = await Event.findById(req.params.id);
     if (event == null) res.redirect("/student/event");
     res.render("student-ejs/show-event-student.ejs", { event: event });
   } catch (error) {

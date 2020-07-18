@@ -326,17 +326,13 @@ textarea{
 
 
 
-.border {
-  padding: 1em 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
 .inner{
   margin-left: 3em;
   margin-top: 1em;
   display: none;
   }
   .inner a{
-    font-size: 1em;
+    font-size: 0.9em;
   }
   
   .add{
@@ -360,8 +356,8 @@ margin-left: 6em;
   color: white;
   font-family: "poppins";
   margin-left: 0.8em;
-font-size: 1em;
+font-size: 0.9em;
 } 
 #i-top{
-  margin-bottom: 0.5em;
+  margin-bottom: 0.8em;
 }
